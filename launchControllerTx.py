@@ -1,5 +1,6 @@
 # Simple demo of sending and recieving data with the RFM95 LoRa radio.
 # Author: Tony DiCola
+import time
 import board
 import busio
 import digitalio
