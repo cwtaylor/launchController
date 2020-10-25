@@ -3,6 +3,8 @@ import board
 import busio
 import adafruit_rfm9x
 
+sugma
+
 RADIO_FREQ_MHZ = 915.0
 CS = digitalio.DigitalInOut(board.CE1)
 RESET = digitalio.DigitalInOut(board.D25)
