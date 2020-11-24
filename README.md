@@ -1,8 +1,6 @@
 # launchController
 Make sure SPI is enabled
-
 	`sudo raspi-config`
-	
 		Interfacing options
 		
 Install libraries 
