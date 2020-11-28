@@ -43,10 +43,10 @@ rfm9x.tx_power = 23
 # call will wait for the previous one to finish before continuing.
 i = 0
 while(i<30):
-  rfm9x.send(bytes("Hello world!\r\n"))
+  rfm9x.send(bytes("Hello world!\r\n", "utf-8"))
   print("Sent Hello World message!")
   time.sleep(10)
   i+=1
   
-       
-
+  
+  
