@@ -5,6 +5,8 @@ import board
 import busio
 import digitalio
 
+from giozero import Button
+
 import adafruit_rfm9x
 
 
