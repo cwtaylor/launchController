@@ -50,21 +50,22 @@ rfm9x.tx_power = 23
 # This is a limitation of the radio packet size, so if you need to send larger
 # amounts of data you will need to break it into smaller send calls.  Each send
 # call will wait for the previous one to finish before continuing.
-def pressed(channel):
-  armed = GPIO.input(switchPin)
-  if armed == GPIO.LOW:
-    print("Go Go Go!")
-    rfm9x.send(bytes("Go Go Go!\r\n", "utf-8"))
- 
-  else:   
-    print("Pressed without arming!")
-  
-  
-GPIO.add_event_detect(goButtonPin, GPIO.RISING, callback=pressed)
-  
 
-  time.sleep(10)
+try:
+  def pressed(channel):
+    armed = GPIO.input(switchPin)
+    if armed == GPIO.LOW:
+      print("Go Go Go!")
+      rfm9x.send(bytes("Go Go Go!\r\n", "utf-8"))
 
+    else:   
+      print("Pressed without arming!")
+
+
+  GPIO.add_event_detect(goButtonPin, GPIO.RISING, callback=pressed)
   
+ finally:
+  GPIO.cleanup()
+
   
   
