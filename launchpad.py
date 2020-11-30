@@ -64,7 +64,7 @@ try:
 
   GPIO.add_event_detect(goButtonPin, GPIO.RISING, callback=pressed)
   
- finally:
+finally:
   GPIO.cleanup()
 
   
