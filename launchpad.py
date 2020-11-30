@@ -5,9 +5,16 @@ import board
 import busio
 import digitalio
 
-from giozero import Button
-
 import adafruit_rfm9x
+
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+
+CSPin = D5
+resetPin = D6
+goButtonPin = D2
+switchPin = D3
+emergencyButton = D4
 
 
 # Define radio parameters.
@@ -15,8 +22,8 @@ RADIO_FREQ_MHZ = 915.0  # Frequency of the radio in Mhz. Must match your
 # module! Can be a value like 915.0, 433.0, etc.
 
 # Define pins connected to the chip, use these if wiring up the breakout according to the guide:
-CS = digitalio.DigitalInOut(board.D5)
-RESET = digitalio.DigitalInOut(board.D6)
+CS = digitalio.DigitalInOut(board.CSPin)
+RESET = digitalio.DigitalInOut(board.resetPin)
 # Or uncomment and instead use these if using a Feather M0 RFM9x board and the appropriate
 # CircuitPython build:
 # CS = digitalio.DigitalInOut(board.RFM9X_CS)
@@ -43,12 +50,21 @@ rfm9x.tx_power = 23
 # This is a limitation of the radio packet size, so if you need to send larger
 # amounts of data you will need to break it into smaller send calls.  Each send
 # call will wait for the previous one to finish before continuing.
-i = 0
-while(i<30):
-  rfm9x.send(bytes("Hello world!\r\n", "utf-8"))
-  print("Sent Hello World message!")
+def pressed(channel):
+  armed = GPIO.input(switchPin)
+  if armed == GPIO.LOW:
+    print("Go Go Go!")
+    rfm9x.send(bytes("Go Go Go!\r\n", "utf-8"))
+ 
+  else:   
+    print("Pressed without arming!")
+  
+  
+GPIO.add_event_detect(goButtonPin, GPIO.RISING, callback=pressed)
+  
+
   time.sleep(10)
-  i+=1
+
   
   
   
