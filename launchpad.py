@@ -10,7 +10,7 @@ import adafruit_rfm9x
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
-CSPin = 5
+CSPin = "D5"
 resetPin = 6
 goButtonPin = 2
 switchPin = 3
