@@ -8,7 +8,7 @@ import digitalio
 import adafruit_rfm9x
 
 import RPi.GPIO as GPIO
-GPIO.setmode(GPIO.BCM)
+#GPIO.setmode(GPIO.BCM)
 
 CSPin = "D5"
 resetPin = 6
