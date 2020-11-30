@@ -10,11 +10,11 @@ import adafruit_rfm9x
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
-CSPin = D5
-resetPin = D6
-goButtonPin = D2
-switchPin = D3
-emergencyButton = D4
+CSPin = 5
+resetPin = 6
+goButtonPin = 2
+switchPin = 3
+emergencyButton = 4
 
 
 # Define radio parameters.
