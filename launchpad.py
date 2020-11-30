@@ -8,12 +8,15 @@ import digitalio
 import adafruit_rfm9x
 
 import RPi.GPIO as GPIO
-#GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 
 
 goButtonPin = 2
 switchPin = 3
 emergencyButton = 4
+
+GPIO.setup(switchPin, GPIO.IN)
+GPIO.setup(goButtonPin, GPIO.IN)
 
 
 # Define radio parameters.
