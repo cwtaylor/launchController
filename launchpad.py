@@ -7,17 +7,6 @@ import digitalio
 
 import adafruit_rfm9x
 
-import RPi.GPIO as GPIO
-GPIO.setmode(GPIO.BCM)
-
-
-goButtonPin = 2
-switchPin = 3
-emergencyButton = 4
-
-GPIO.setup(switchPin, GPIO.IN)
-GPIO.setup(goButtonPin, GPIO.IN)
-
 
 # Define radio parameters.
 RADIO_FREQ_MHZ = 915.0  # Frequency of the radio in Mhz. Must match your
@@ -31,6 +20,9 @@ RESET = digitalio.DigitalInOut(board.D6)
 # CS = digitalio.DigitalInOut(board.RFM9X_CS)
 # RESET = digitalio.DigitalInOut(board.RFM9X_RST)
 
+# Define the onboard LED
+LED = digitalio.DigitalInOut(board.D13)
+LED.direction = digitalio.Direction.OUTPUT
 
 # Initialize SPI bus.
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
@@ -49,22 +41,9 @@ rfm9x.tx_power = 23
 # This is a limitation of the radio packet size, so if you need to send larger
 # amounts of data you will need to break it into smaller send calls.  Each send
 # call will wait for the previous one to finish before continuing.
-
-try:
-  def pressed(channel):
-    armed = GPIO.input(switchPin)
-    if armed == GPIO.LOW:
-      print("Go Go Go!")
-      rfm9x.send(bytes("Go Go Go!\r\n", "utf-8"))
-
-    else:   
-      print("Pressed without arming!")
-
-
-  GPIO.add_event_detect(goButtonPin, GPIO.RISING, callback=pressed)
-  
-finally:
-  GPIO.cleanup()
-
-  
-  
+i = 0
+while(i<30):
+  rfm9x.send(bytes("Hello world!\r\n", "utf-8"))
+  print("Sent Hello World message!")
+  time.sleep(10)
+  i+=1
